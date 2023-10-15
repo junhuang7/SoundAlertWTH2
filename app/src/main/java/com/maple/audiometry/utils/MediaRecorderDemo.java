@@ -1,8 +1,5 @@
 package com.maple.audiometry.utils;
 
-import java.io.File;
-import java.io.IOException;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -15,44 +12,45 @@ import androidx.core.app.NotificationCompat;
 
 import com.maple.audiometry.R;
 
+import java.io.File;
+import java.io.IOException;
+
 public class MediaRecorderDemo {
-	private final String TAG = "MediaRecord";
-	public static final int MAX_LENGTH = 1000 * 60 * 10;
+	private static final String TAG = "MediaRecord";
+	private static final int MAX_LENGTH = 1000 * 60 * 10;
+	private static final String CHANNEL_ID = "noise_alert_channel";
+	private static final String CHANNEL_NAME = "Noise Alerts";
+
 	private MediaRecorder mMediaRecorder;
-	private int BASE = 1;
-	private int SPACE = 100;
+	private final int BASE = 1;
+	private final int SPACE = 100;
 	private long startTime;
 	private long endTime;
-	private String filePath;
-	private NoiseValueUpdateCallback mNoiseCallBack;
+	private final String filePath;
+	private final NoiseValueUpdateCallback mNoiseCallBack;
 	private final Handler mHandler = new Handler();
-	private Context mContext; // <-- Added this line for context
+	private final Context mContext;
 
-	private Runnable mUpdateMicStatusTimer = new Runnable() {
-		public void run() {
-			updateMicStatus();
-		}
-	};
+	private final Runnable mUpdateMicStatusTimer = this::updateMicStatus;
 
 	public interface NoiseValueUpdateCallback {
 		void onUpdateNoiseValue(double noiseValue);
 	}
 
 	public MediaRecorderDemo(Context context, NoiseValueUpdateCallback noiseValueUpdateCallback) {
-		this.filePath = "/dev/null";
-		this.mNoiseCallBack = noiseValueUpdateCallback;
-		this.mContext = context; // <-- Initialized the context here
+		this(context, new File("/dev/null"), noiseValueUpdateCallback);
 	}
 
 	public MediaRecorderDemo(Context context, File file, NoiseValueUpdateCallback noiseValueUpdateCallback) {
 		this.filePath = file.getAbsolutePath();
 		this.mNoiseCallBack = noiseValueUpdateCallback;
-		this.mContext = context; // <-- Initialized the context here
+		this.mContext = context;
 	}
 
 	public void startRecord() {
-		if (mMediaRecorder == null)
+		if (mMediaRecorder == null) {
 			mMediaRecorder = new MediaRecorder();
+		}
 		try {
 			mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
@@ -63,9 +61,9 @@ public class MediaRecorderDemo {
 			mMediaRecorder.start();
 			startTime = System.currentTimeMillis();
 			updateMicStatus();
-			Log.i("ACTION_START", "开始时间" + startTime);
+			Log.i(TAG, "Start time: " + startTime);
 		} catch (IllegalStateException | IOException e) {
-			Log.i(TAG, "call startAmr(File mRecAudioFile) 失败!" + e.getMessage());
+			Log.i(TAG, "Failed to start recording: " + e.getMessage());
 		}
 	}
 
@@ -73,8 +71,9 @@ public class MediaRecorderDemo {
 		if (mMediaRecorder != null) {
 			double ratio = (double) mMediaRecorder.getMaxAmplitude() / BASE;
 			double db = 0;
-			if (ratio > 1)
+			if (ratio > 1) {
 				db = 20 * Math.log10(ratio);
+			}
 
 			if (db > 70) {
 				showWarningNotification();
@@ -89,29 +88,30 @@ public class MediaRecorderDemo {
 		NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			NotificationChannel channel = new NotificationChannel("noise_alert_channel", "Noise Alerts", NotificationManager.IMPORTANCE_HIGH);
+			NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
 			notificationManager.createNotificationChannel(channel);
 		}
 
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, "noise_alert_channel")
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
 				.setSmallIcon(R.drawable.icon_512)
 				.setContentTitle("High Noise Level Detected!")
-				.setContentText("Noise level over 80 dB & WhatTheHack2 is the BEST!")
+				.setContentText("Noise level over 70 dB & WhatTheHack2 is the BEST!")
 				.setPriority(NotificationCompat.PRIORITY_HIGH);
 
 		notificationManager.notify(1, builder.build());
 	}
 
 	public long stopRecord() {
-		if (mMediaRecorder == null)
+		if (mMediaRecorder == null) {
 			return 0L;
+		}
 		endTime = System.currentTimeMillis();
-		Log.i("ACTION_END", "结束时间" + endTime);
+		Log.i(TAG, "End time: " + endTime);
 		mMediaRecorder.stop();
 		mMediaRecorder.reset();
 		mMediaRecorder.release();
 		mMediaRecorder = null;
-		Log.i("ACTION_LENGTH", "时间" + (endTime - startTime));
+		Log.i(TAG, "Duration: " + (endTime - startTime));
 		return endTime - startTime;
 	}
 }

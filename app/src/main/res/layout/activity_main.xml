@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="2"
+        android:layout_weight="0"
         android:src="@drawable/main_title" />
 
     <Button
@@ -32,7 +32,7 @@
         android:layout_margin="45dp"
         android:layout_weight="1"
         android:background="@drawable/selector_button_color"
-        android:text="噪音测量"
+        android:text="Noise detection"
         android:textColor="@color/button_text_color"
         android:textSize="35sp"
         android:textStyle="bold" />
@@ -45,7 +45,7 @@
         android:layout_margin="45dp"
         android:layout_weight="1"
         android:background="@drawable/selector_button_color"
-        android:text="纯音测试"
+        android:text="Tiny ML"
         android:textColor="@color/button_text_color"
         android:textSize="35sp"
         android:textStyle="bold" />

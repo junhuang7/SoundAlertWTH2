@@ -5,9 +5,8 @@ import com.maple.audiometry.R
 import com.maple.audiometry.ui.base.BaseFragmentActivity
 
 /**
- * 噪音检测
+ * noise detection
  *
- * @author shaoshuai
  */
 class NoiseCheckActivity : BaseFragmentActivity() {
 

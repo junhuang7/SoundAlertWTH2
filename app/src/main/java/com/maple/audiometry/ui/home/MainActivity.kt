@@ -2,6 +2,7 @@ package com.maple.audiometry.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import com.maple.audiometry.R
 import com.maple.audiometry.ui.base.BaseFragmentActivity
 import com.maple.audiometry.ui.detection.DetectionActivity
@@ -19,6 +20,9 @@ class MainActivity : BaseFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // https://developer.android.com/training/scheduling/wakelock
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
 
         bt_noise.setOnClickListener { toCheckNoise() }
         bt_voice.setOnClickListener { toCheckEar() }
