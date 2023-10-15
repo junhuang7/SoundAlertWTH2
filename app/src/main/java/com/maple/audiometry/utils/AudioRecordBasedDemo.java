@@ -4,11 +4,13 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.util.Log;
+import android.net.Uri;
 
 import com.maple.audiometry.R;
 
@@ -80,32 +82,48 @@ public class AudioRecordBasedDemo {
 			volume = 20 * Math.log10(mean);
 		}
 
-		if (volume > 120) {
+		if (volume > 110) {
 			sendDangerousNotification();
 		} else if (volume >= 90) {
 			sendPotentiallyDangerousNotification();
 		}
 
-		return volume * 1.05;
+		return volume * 1.1;
 	}
 
 	private void sendPotentiallyDangerousNotification() {
-		sendNotification("Potentially Dangerous Sound Alert", "Detected sound level between 90dB to 120dB!");
+		sendNotification("Potentially Dangerous Sound Alert",
+				"Detected sound level between 90dB to 110dB!",
+				R.raw.sound_potentially_dangerous,
+				"potentially_dangerous_sound_alert");  // Use a different channel ID
 	}
 
 	private void sendDangerousNotification() {
-		sendNotification("Dangerous Sound Alert", "Detected sound level over 120dB! Should be avoided.");
+		sendNotification("Dangerous Sound Alert",
+				"Detected sound level over 110dB! Should be avoided.",
+				R.raw.sound_dangerous,
+				"dangerous_sound_alert");
 	}
 
-	private void sendNotification(String title, String content) {
-		String channelId = "dangerous_sound_alert";
-		String channelName = "Dangerous Sound Alert Channel";
+	private void sendNotification(String title, String content, int soundResId, String channelId) {
+		String channelName = title;  // Use the title as channel name for simplicity
 
 		NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
-			notificationManager.createNotificationChannel(channel);
+			NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
+			if (channel == null) {
+				channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+
+				Uri soundUri = Uri.parse("android.resource://" + mContext.getPackageName() + "/" + soundResId);
+				AudioAttributes audioAttributes = new AudioAttributes.Builder()
+						.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+						.setUsage(AudioAttributes.USAGE_NOTIFICATION)
+						.build();
+
+				channel.setSound(soundUri, audioAttributes);
+				notificationManager.createNotificationChannel(channel);
+			}
 		}
 
 		Notification notification = null;
@@ -113,10 +131,12 @@ public class AudioRecordBasedDemo {
 			notification = new Notification.Builder(mContext, channelId)
 					.setContentTitle(title)
 					.setContentText(content)
-					.setSmallIcon(R.drawable.icon_512) // replace with your icon
+					.setSmallIcon(R.drawable.icon_512)
 					.build();
 		}
 
 		notificationManager.notify(1, notification);
 	}
+
+
 }
