@@ -79,28 +79,28 @@ public class AudioRecordBasedDemo {
 
 		// Only compute decibels if mean is greater than 1 to avoid negative or -Infinity dB values
 		if (mean > 1) {
-			volume = 20 * Math.log10(mean);
+			volume = 15 * Math.log10(mean);
 		}
 
-		if (volume > 110) {
+		if (volume > 100) {
 			sendDangerousNotification();
 		} else if (volume >= 90) {
 			sendPotentiallyDangerousNotification();
 		}
 
-		return volume * 1.1;
+		return volume * 1;
 	}
 
 	private void sendPotentiallyDangerousNotification() {
 		sendNotification("Potentially Dangerous Sound Alert",
-				"Detected sound level between 90dB to 110dB!",
+				"Detected sound level between 90dB to 100dB!",
 				R.raw.sound_potentially_dangerous,
 				"potentially_dangerous_sound_alert");  // Use a different channel ID
 	}
 
 	private void sendDangerousNotification() {
 		sendNotification("Dangerous Sound Alert",
-				"Detected sound level over 110dB! Should be avoided.",
+				"Detected sound level over 100dB! Should be avoided.",
 				R.raw.sound_dangerous,
 				"dangerous_sound_alert");
 	}
