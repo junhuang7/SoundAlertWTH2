@@ -73,9 +73,14 @@ public class AudioRecordBasedDemo {
 			v += buffer[i] * buffer[i];
 		}
 		double mean = v / (double) r;
-		double volume = 20 * Math.log10(mean);
+		double volume = 0;
 
-		if (volume > 100) {
+		// Only compute decibels if mean is greater than 1 to avoid negative or -Infinity dB values
+		if (mean > 1) {
+			volume = 20 * Math.log10(mean);
+		}
+
+		if (volume > 120) {
 			sendDangerousNotification();
 		} else if (volume >= 90) {
 			sendPotentiallyDangerousNotification();
@@ -85,11 +90,11 @@ public class AudioRecordBasedDemo {
 	}
 
 	private void sendPotentiallyDangerousNotification() {
-		sendNotification("Potentially Dangerous Sound Alert", "Detected sound level between 90dB to 100dB!");
+		sendNotification("Potentially Dangerous Sound Alert", "Detected sound level between 90dB to 120dB!");
 	}
 
 	private void sendDangerousNotification() {
-		sendNotification("Dangerous Sound Alert", "Detected sound level over 100dB! Should be avoided.");
+		sendNotification("Dangerous Sound Alert", "Detected sound level over 120dB! Should be avoided.");
 	}
 
 	private void sendNotification(String title, String content) {
