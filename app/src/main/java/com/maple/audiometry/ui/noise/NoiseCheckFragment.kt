@@ -15,6 +15,7 @@ import com.maple.audiometry.ui.base.BaseFragment
 import com.maple.audiometry.ui.base.BaseFragmentActivity
 import com.maple.audiometry.ui.detection.DetectionActivity
 import com.maple.audiometry.utils.ArrayUtils
+import com.maple.audiometry.utils.AudioRecordBasedDemo
 import com.maple.audiometry.utils.MediaRecorderDemo
 import com.maple.audiometry.utils.permission.RxPermissions
 import com.maple.audiometry.view.BrokenLineView
@@ -33,7 +34,7 @@ class NoiseCheckFragment : BaseFragment() {
     }
 
     private var startTime: Long = 0
-    private var media: MediaRecorderDemo? = null
+    private var media: AudioRecordBasedDemo? = null
     private lateinit var mBrokenLine: BrokenLineView
     private var maxVolume = 0.0
     private var minVolume = 99990.0
@@ -76,14 +77,14 @@ class NoiseCheckFragment : BaseFragment() {
     }
 
     private val checkNoise = Runnable {
-        media = MediaRecorderDemo(requireActivity(), object: MediaRecorderDemo.NoiseValueUpdateCallback {
+        media = AudioRecordBasedDemo(object : AudioRecordBasedDemo.NoiseValueUpdateCallback {
             override fun onUpdateNoiseValue(noiseValue: Double) {
                 val msg = Message.obtain()
                 msg.what = UPDATE_NOISE_VALUE
                 msg.obj = noiseValue
                 handler.sendMessage(msg)
             }
-        })
+        }, activity)
         media?.startRecord()
         startTime = System.currentTimeMillis()
     }
@@ -95,23 +96,35 @@ class NoiseCheckFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun updateNoise(db: Double) {
-        tv_noise_value.text = "${db.toInt()} dB"
-        if (db > maxVolume) {
-            maxVolume = db
-            tv_max_value.text = "Highest:\n ${maxVolume.toInt()} dB"
-        }
-        if (db < minVolume && db != 0.0) {
-            minVolume = db
-            tv_min_value.text = "Lowest:\n ${minVolume.toInt()} dB"
-        }
-        if (db != 0.0) {
+        // Avoid updating with extreme values
+        if (db != Double.NEGATIVE_INFINITY && db != Double.POSITIVE_INFINITY && db != -2147483648.0) {
+            tv_noise_value.text = "${db.toInt()} dB"
+
+            // Update max volume
+            if (db > maxVolume) {
+                maxVolume = db
+                tv_max_value.text = "Highest:\n ${maxVolume.toInt()} dB"
+            }
+
+            // Update min volume
+            if (db < minVolume) {
+                minVolume = db
+                tv_min_value.text = "Lowest:\n ${minVolume.toInt()} dB"
+            }
+
+            // Update average volume
             allVolume.add(db)
             val avgVolume = ArrayUtils.avg(allVolume)
-            tv_db_explain1.text = dbExplain[(avgVolume / 10).toInt()]
-            tv_db_explain2.text = dbExplain[(avgVolume / 10).toInt() + 1]
+            val index1 = (avgVolume / 10).toInt().coerceIn(0, dbExplain.size - 2)  // ensure it's within bounds
+            val index2 = (index1 + 1).coerceIn(0, dbExplain.size - 1)  // ensure it's within bounds
+
+            tv_db_explain1.text = dbExplain[index1]
+            tv_db_explain2.text = dbExplain[index2]
             tv_avg_value.text = "Average:\n ${avgVolume.toInt()} dB"
         }
     }
+
+
 
     private fun showDialog() {
         val alertMessage = if (ArrayUtils.avg(allVolume) > 40) {
