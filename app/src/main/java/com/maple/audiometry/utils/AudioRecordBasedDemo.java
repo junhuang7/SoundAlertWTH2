@@ -75,14 +75,24 @@ public class AudioRecordBasedDemo {
 		double mean = v / (double) r;
 		double volume = 20 * Math.log10(mean);
 
-		if (volume > 80) {
-			sendNotification();
+		if (volume > 100) {
+			sendDangerousNotification();
+		} else if (volume >= 90) {
+			sendPotentiallyDangerousNotification();
 		}
 
 		return volume * 1.05;
 	}
 
-	private void sendNotification() {
+	private void sendPotentiallyDangerousNotification() {
+		sendNotification("Potentially Dangerous Sound Alert", "Detected sound level between 90dB to 100dB!");
+	}
+
+	private void sendDangerousNotification() {
+		sendNotification("Dangerous Sound Alert", "Detected sound level over 100dB! Should be avoided.");
+	}
+
+	private void sendNotification(String title, String content) {
 		String channelId = "dangerous_sound_alert";
 		String channelName = "Dangerous Sound Alert Channel";
 
@@ -96,8 +106,8 @@ public class AudioRecordBasedDemo {
 		Notification notification = null;
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			notification = new Notification.Builder(mContext, channelId)
-					.setContentTitle("Dangerous Sound Alert")
-					.setContentText("Detected sound level over 80dB!")
+					.setContentTitle(title)
+					.setContentText(content)
 					.setSmallIcon(R.drawable.icon_512) // replace with your icon
 					.build();
 		}
