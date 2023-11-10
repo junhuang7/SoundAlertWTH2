@@ -43,6 +43,6 @@
     <!-- 检查设备 -->
 
     <string name="introduceText1">\t\t\t This app is a sound alert system </string>
-    <string name="introduceText2">\t\t\t The sound alert system app can help in many occasions</string>
+    <string name="introduceText2">\t\t\t The sound alert system app can help alert you of dangers when distracted</string>
     <string name="end">轻度听力损失：26-40dB\n中度听力损失：41-55dB\n中重度听力损失：56-70dB\n重度听力损失：71-90dB\n极重度听力损失：>91dB</string>
 </resources>
