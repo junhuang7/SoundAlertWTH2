@@ -19,7 +19,7 @@
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="简介"
+        android:text="Intro"
         android:textColor="#437844"
         android:textSize="50sp"
         android:textStyle="bold" />
@@ -38,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/introduceText1"
-            android:textSize="15sp" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </ScrollView>
 
 </RelativeLayout>
