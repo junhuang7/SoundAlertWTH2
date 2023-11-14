@@ -10,23 +10,16 @@ import com.maple.audiometry.ui.noise.NoiseCheckActivity
 import com.maple.audiometry.utils.T
 import kotlinx.android.synthetic.main.activity_main.*
 
-/**
- * 功能主界面
- *
- * @author maple
- */
 class MainActivity : BaseFragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // https://developer.android.com/training/scheduling/wakelock
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-
 
         bt_noise.setOnClickListener { toCheckNoise() }
         bt_voice.setOnClickListener { toCheckEar() }
-
+        bt_yamnet.setOnClickListener { launchYamnetApp() }
     }
 
     // 去检测噪音
@@ -41,6 +34,16 @@ class MainActivity : BaseFragmentActivity() {
         startActivity(intent)
     }
 
+    // Launch YAMNET App
+    private fun launchYamnetApp() {
+        val launchIntent = packageManager.getLaunchIntentForPackage("org.tensorflow.lite.examples.audio")
+        if (launchIntent != null) {
+            startActivity(launchIntent)
+        } else {
+            T.showShort(mContext, "YAMNET app not found")
+        }
+    }
+
     private var exitTime: Long = 0
     override fun onBackPressed() {
         if (System.currentTimeMillis() - exitTime > 2000) {
@@ -50,5 +53,4 @@ class MainActivity : BaseFragmentActivity() {
             finish()
         }
     }
-
 }

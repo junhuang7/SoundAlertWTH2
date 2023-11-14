@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="最高分贝:\n 90 dB"
+            android:text="Max:\n 90 dB"
             android:textSize="20sp" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="平均分贝:\n 65 dB"
+            android:text="Mean:\n 65 dB"
             android:textSize="20sp" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="最低分贝:\n 40 dB"
+            android:text="Min:\n 40 dB"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -93,7 +93,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="说明"
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
@@ -110,7 +109,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="说明"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </LinearLayout>
