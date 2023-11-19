@@ -77,13 +77,11 @@ class NoiseCheckFragment : BaseFragment() {
     }
 
     private val checkNoise = Runnable {
-        media = AudioRecordBasedDemo(object : AudioRecordBasedDemo.NoiseValueUpdateCallback {
-            override fun onUpdateNoiseValue(noiseValue: Double) {
-                val msg = Message.obtain()
-                msg.what = UPDATE_NOISE_VALUE
-                msg.obj = noiseValue
-                handler.sendMessage(msg)
-            }
+        media = AudioRecordBasedDemo({ noiseValue ->
+            val msg = Message.obtain()
+            msg.what = UPDATE_NOISE_VALUE
+            msg.obj = noiseValue
+            handler.sendMessage(msg)
         }, activity)
         media?.startRecord()
         startTime = System.currentTimeMillis()

@@ -44,7 +44,7 @@ class SplashActivity : BaseFragmentActivity() {
     private fun initViews() {
         // 初始化页面
         val inflater = LayoutInflater.from(this)
-        val guideView1 = inflater.inflate(R.layout.view_guide_1, null)
+        //val guideView1 = inflater.inflate(R.layout.view_guide_1, null)
         val guideView2 = inflater.inflate(R.layout.view_guide_2, null)
         val guideView3 = inflater.inflate(R.layout.view_guide_3, null)
         val guideStartBtn: Button = guideView3.findViewById(R.id.next)
@@ -57,7 +57,7 @@ class SplashActivity : BaseFragmentActivity() {
         )
         // 添加页面
         guideViews = arrayListOf(
-                guideView1,
+                //guideView1,
                 guideView2,
                 guideView3
         )

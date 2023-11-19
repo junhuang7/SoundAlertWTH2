@@ -30,7 +30,7 @@ class ResultFragment : BaseFragment() {
         mActivity = activity as DetectionActivity
 
         tv_left.setOnClickListener { mActivity.onBackPressed() }
-        tv_title.text = "测试结果"
+        tv_title.text = "Result"
 
         initView()
     }

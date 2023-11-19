@@ -52,11 +52,11 @@ class TestFragment : BaseFragment() {
         mActivity = activity as DetectionActivity
 
         tv_left.setOnClickListener { mActivity.onBackPressed() }
-        tv_title.text = "测试"
+        tv_title.text = "Testing"
 
         isLeft = mActivity.isLeft
 
-        tv_explain.text = if (isLeft) "左耳" else "右耳"
+        tv_explain.text = if (isLeft) "Left Ear" else "Right Ear"
         bt_play.setOnClickListener {
             startPlay(hzArr[curHZ], dBArr[curDB], isLeft)
             toResult()
@@ -73,9 +73,9 @@ class TestFragment : BaseFragment() {
 
     override fun onKeyBackPressed(): Boolean {
         AlertDialog(mContext)
-                .setDialogTitle("是否退出当前测试？")
-                .setLeftButton("取消", null)
-                .setRightButton("退出") { mActivity.backFragment() }
+                .setDialogTitle("Exit out of testing?")
+                .setLeftButton("Cancel", null)
+                .setRightButton("Exit") { mActivity.backFragment() }
                 .show()
         return true
     }
@@ -91,7 +91,7 @@ class TestFragment : BaseFragment() {
             }
         }
         curDB = revise(curDB + 1, 0, dBArr.size - 1)
-        tv_current_db.text = "当前分贝:\n ${dBArr[curDB]} dB"
+        tv_current_db.text = "Current dB:\n ${dBArr[curDB]} dB"
         // updateDB(hzArr[curHZ], dBArr[curDB]);
     }
 
@@ -106,7 +106,7 @@ class TestFragment : BaseFragment() {
                 rDBMinVal[curHZ][0] = dBArr[curDB]// 保存左耳当前频率的第一次听到数据
             }
             curDB = revise(curDB - 2, 0, dBArr.size - 1)// 更换分贝 （ 减10分贝）
-            tv_current_db.text = "当前分贝:\n ${dBArr[curDB]} dB"
+            tv_current_db.text = "Current dB:\n ${dBArr[curDB]} dB"
             // updateDB(hzArr[curHZ], dBArr[curDB]);
         } else {// 第二次测试左耳最低值
             var sub = 0
@@ -114,7 +114,7 @@ class TestFragment : BaseFragment() {
                 lDBMinVal[curHZ][1] = dBArr[curDB]// 保存当前频率的第二次听到数据
                 // 同第一次做对比。
                 sub = lDBMinVal[curHZ][1] - lDBMinVal[curHZ][0]
-                Log.e("计算左耳差值", lDBMinVal[curHZ][0].toString() + "减去"
+                Log.e("Calculating Left Ear", lDBMinVal[curHZ][0].toString() + "Minus"
                         + lDBMinVal[curHZ][1] + " = " + sub)
                 // 取两次平均值，更新视图
                 // mMelodyView.updateData(curHZ,
@@ -133,7 +133,7 @@ class TestFragment : BaseFragment() {
                 // isLeft);// 更新折线图
             }
             if (Math.abs(sub) > 20) {
-                T.showShort(mContext, "因为您的两次测试结果相差巨大，需要重测该频率")
+                T.showShort(mContext, "Due to significant differences between two tests, please try again.")
                 // 如果相差巨大，重新测试。
                 lDBMinVal[curHZ][0] = 0
                 lDBMinVal[curHZ][1] = 0
@@ -186,7 +186,7 @@ class TestFragment : BaseFragment() {
         curDB = defCurDB
         curHZ = defCurHZ
         updateDes()
-        tv_explain.text = "右耳"
+        tv_explain.text = "Right Ear"
     }
 
     /**
@@ -199,14 +199,14 @@ class TestFragment : BaseFragment() {
         curDB = defCurDB
         curHZ = defCurHZ
         updateDes()
-        tv_explain.text = "左耳"
+        tv_explain.text = "Left Ear"
     }
 
     @SuppressLint("SetTextI18n")
     private fun updateDes() {
         tv_play_des.text = "${hzArr[curHZ]} Hz\n${dBArr[curDB]} dB"
-        tv_current_hz.text = "当前频率:\n ${hzArr[curHZ]} Hz"
-        tv_current_db.text = "当前分贝:\n ${dBArr[curDB]} dB"
+        tv_current_hz.text = "Current Frequency:\n ${hzArr[curHZ]} Hz"
+        tv_current_db.text = "Current dB:\n ${dBArr[curDB]} dB"
     }
 
     /**

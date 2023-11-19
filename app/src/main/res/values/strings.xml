@@ -21,28 +21,28 @@
     </string-array>
     <!-- 听力等级 -->
     <string-array name="hearing_rank_arr">
-        <item>正常</item>
-        <item>轻度</item>
-        <item>中度</item>
-        <item>中重度</item>
-        <item>重度</item>
-        <item>极重度</item>
+        <item>Normal</item>
+        <item>Minor</item>
+        <item>Medium</item>
+        <item>Medium to Serious</item>
+        <item>Serious</item>
+        <item>Very Serious</item>
     </string-array>
     <!-- 分析与建议 -->
     <string-array name="propose_arr">
-        <item>正常听力：\n\t\t  正常听力，继续保持。</item>
-        <item>轻度听力损失的分析与建议：\n\t\t  您在嘈杂的环境下，听小声不是特别好，但是日常交流不存在问题。不要过度担心，不要长时间暴露在噪声环境和长时间戴耳机。</item>
-        <item>中度听力损失的分析与建议：\n\t\t  您在日常交流不存在问题，但是您在远距离的交流与嘈杂环境中的交流尚不理想。建议到医院做一个详细进一步的检查。</item>
-        <item>中重度听力损失的分析与建议：\n\t\t  您在日常交流不存在问题，但是您在远距离的交流与嘈杂环境中的交流尚不理想。建议到医院做一个详细进一步的检查。</item>
-        <item>重度听力损失的分析与建议：\n\t\t  您在一对一的交流还是可以进行的，但是在日常交流有些困难，需要说话者提高音量讲话，所以会影响你的生活质量。建议您到医院做进一步的检查或者到助听器店做一个咨询。</item>
-        <item>极重度听力损失的分析与建议：\n\t\t  您很少参与日常生活交流，您觉得别人讲话声音不响。您现在的听力损失严重影响您的生活质量，需要尽快到医院做进一步的检查或者到助听器店做一个咨询。</item>
+        <item>Normal hearing ability：\n\t\t  Normal hearing ability, keep up the good work.</item>
+        <item>Minor hearing loss：\n\t\t  It is not particularly good for you to hear low voices in a noisy environment, but there is no problem with daily communication. Do not worry too much, do not expose yourself to noise for long periods of time, and do not wear headphones for long periods of time.</item>
+        <item>Medium hearing loss：\n\t\t  There is no problem with your daily communication, but your communication over long distances and in noisy environments is not ideal. It is recommended to go to the hospital for a detailed further examination.</item>
+        <item>Medium to Serious hearing loss：\n\t\t  There is no problem with your daily communication, but your communication over long distances and in noisy environments is not ideal. It is recommended to go to the hospital for a detailed further examination.</item>
+        <item>Serious hearing loss：\n\t\t  You can still communicate one-on-one, but daily communication is somewhat difficult and requires the speaker to speak at a higher volume, which will affect your quality of life. It is recommended that you go to the hospital for further examination or to a hearing aid store for a consultation.</item>
+        <item>Very serious hearing loss：\n\t\t  You seldom participate in daily life communication, and you feel that other people\'s voices are muted. Your current hearing loss seriously affects your quality of life. You need to go to the hospital for further examination as soon as possible or go to a hearing aid store for consultation.</item>
     </string-array>
     <!-- 检查设备 -->
-    <string name="check_device_des1">1、 请带上耳机，点击“测试设备”按钮，检测当前耳机是否可用。</string>
-    <string name="check_device_des2">2、 若左右耳均能正常听到声音，则选择听力较好耳先进行测试。</string>
+    <string name="check_device_des1">1. Please wear a headphone, click "Test" button, to test your headphone.</string>
+    <string name="check_device_des2">2. If Left Ear and Right Ear is working, then choose the ear that has optimal hearing to test.</string>
     <!-- 检查设备 -->
 
-    <string name="introduceText1">\t\t\t This app is a sound alert system </string>
-    <string name="introduceText2">\t\t\t The sound alert system app can help alert you of dangers when distracted</string>
-    <string name="end">轻度听力损失：26-40dB\n中度听力损失：41-55dB\n中重度听力损失：56-70dB\n重度听力损失：71-90dB\n极重度听力损失：>91dB</string>
+    <string name="introduceText1">\n This application is used to detect sound noises and trigger alerts if classified as potentially dangerous.</string>
+    <string name="introduceText2">\n The sound alert system app can help alert you of dangers when distracted. </string>
+    <string name="end">Minor hearing loss：26-40dB\nMedium hearing loss：41-55dB\nMedium to Serious hearing loss：56-70dB\nSerious hearing loss：71-90dB\nVery serious hearing loss：>91dB</string>
 </resources>
