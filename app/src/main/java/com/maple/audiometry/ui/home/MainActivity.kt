@@ -1,5 +1,6 @@
 package com.maple.audiometry.ui.home
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
@@ -22,13 +23,13 @@ class MainActivity : BaseFragmentActivity() {
         bt_yamnet.setOnClickListener { launchYamnetApp() }
     }
 
-    // 去检测噪音
+    // noise check
     private fun toCheckNoise() {
         val intent = Intent(this, NoiseCheckActivity::class.java)
         startActivity(intent)
     }
 
-    // 去检查耳朵
+    // ear check
     private fun toCheckEar() {
         val intent = Intent(this, DetectionActivity::class.java)
         startActivity(intent)
@@ -38,13 +39,26 @@ class MainActivity : BaseFragmentActivity() {
 
     // Launch YAMNET App
     private fun launchYamnetApp() {
+        // Attempt to launch the app using the package name
         val launchIntent = packageManager.getLaunchIntentForPackage("org.tensorflow.lite.examples.audio")
         if (launchIntent != null) {
             startActivity(launchIntent)
+            //T.showShort(mContext, "YAMNET app found")
         } else {
-            T.showShort(mContext, "YAMNET app not found")
+            // If the package manager couldn't find the app, try launching it directly by activity name
+            val intent = Intent().apply {
+                setClassName("org.tensorflow.lite.examples.audio", "org.tensorflow.lite.examples.audio.MainActivity")
+            }
+            try {
+                startActivity(intent)
+                //T.showShort(mContext, "YAMNET func found")
+            } catch (e: ActivityNotFoundException) {
+                // If the activity isn't found, show an error message
+                T.showShort(mContext, "YAMNET app not found")
+            }
         }
     }
+
 
     private var exitTime: Long = 0
     override fun onBackPressed() {

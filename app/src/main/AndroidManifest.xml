@@ -6,29 +6,31 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!--<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>-->
-    <!--<uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>-->
-
+    <!-- <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/> -->
+    <!-- <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/> -->
 
     <application
         android:name=".PureToneApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/noise_title"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".ui.welcome.SplashActivity">
+        <activity android:name=".ui.welcome.SplashActivity"
+            android:exported="true"> <!-- Launcher activity must be exported -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.home.MainActivity" />
-        <activity android:name=".ui.detection.DetectionActivity" />
-        <activity android:name=".ui.noise.NoiseCheckActivity" />
+        <activity android:name=".ui.home.MainActivity"
+            android:exported="true"/> <!-- Must be exported if it can be started from other apps -->
+        <activity android:name=".ui.detection.DetectionActivity"
+            android:exported="false"/> <!-- Exported attribute based on whether it should be accessible from other apps -->
+        <activity android:name=".ui.noise.NoiseCheckActivity"
+            android:exported="false"/> <!-- Exported attribute based on whether it should be accessible from other apps -->
     </application>
 
 </manifest>
