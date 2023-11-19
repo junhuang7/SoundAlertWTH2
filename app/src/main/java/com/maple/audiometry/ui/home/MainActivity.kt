@@ -34,6 +34,8 @@ class MainActivity : BaseFragmentActivity() {
         startActivity(intent)
     }
 
+    //LENA: should we remove the button below to launch YAMNET -- DOESNT SEEM TO WORK
+
     // Launch YAMNET App
     private fun launchYamnetApp() {
         val launchIntent = packageManager.getLaunchIntentForPackage("org.tensorflow.lite.examples.audio")
@@ -47,7 +49,7 @@ class MainActivity : BaseFragmentActivity() {
     private var exitTime: Long = 0
     override fun onBackPressed() {
         if (System.currentTimeMillis() - exitTime > 2000) {
-            T.showShort(mContext, "再按一次退出程序")
+            T.showShort(mContext, "Press one more time to exit.")
             exitTime = System.currentTimeMillis()
         } else {
             finish()

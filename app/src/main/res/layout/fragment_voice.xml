@@ -5,15 +5,8 @@
     android:padding="10dp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="right"
-        android:layout_weight="1"
-        android:src="@drawable/logo" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:src="@drawable/voice_title" />
@@ -38,7 +31,7 @@
         android:layout_weight="1"
         android:background="@drawable/selector_button_color"
         android:padding="15dp"
-        android:text="  测试设备  "
+        android:text="Test"
         android:textColor="@color/button_text_color"
         android:textSize="35sp"
         android:textStyle="bold" />
@@ -70,7 +63,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="20dp"
             android:background="@drawable/selector_circle_color"
-            android:text="左耳"
+            android:text="Left Ear"
             android:textColor="@color/button_text_color"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -82,7 +75,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:background="@drawable/selector_circle_color"
-            android:text="右耳"
+            android:text="Right Ear"
             android:textColor="@color/button_text_color"
             android:textSize="30sp"
             android:textStyle="bold" />

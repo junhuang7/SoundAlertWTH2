@@ -31,7 +31,7 @@ class EndFragment : BaseFragment() {
         mActivity = activity as DetectionActivity
 
         tv_left.setOnClickListener { mActivity.onBackPressed() }
-        tv_title.text = "分析报告"
+        tv_title.text = "Report Analysis"
 
         initView()
     }
@@ -48,16 +48,16 @@ class EndFragment : BaseFragment() {
         // 听力等级
         val df = DecimalFormat("##.00")
         val hearingRank = resources.getStringArray(R.array.hearing_rank_arr)
-        val leftStr = "左耳：" + df.format(left) + "(" + hearingRank[leftRank] + ")"
-        val rightStr = "右耳：" + df.format(right) + "(" + hearingRank[rightRank] + ")"
+        val leftStr = "Left Ear：" + df.format(left) + "(" + hearingRank[leftRank] + ")"
+        val rightStr = "Right Ear：" + df.format(right) + "(" + hearingRank[rightRank] + ")"
         tv_check_result.text = leftStr + "\n" + rightStr
         // 分析和建议
         // 分析建议的说明文字
         val dbExplain = resources.getStringArray(R.array.propose_arr)
         if (leftRank == rightRank) {
-            tv_propose.text = "双耳：\n" + dbExplain[leftRank]
+            tv_propose.text = "Both Ears：\n" + dbExplain[leftRank]
         } else {
-            tv_propose.text = "左耳：\n" + dbExplain[leftRank] + "\n右耳：\n" + dbExplain[rightRank]
+            tv_propose.text = "Left Ear：\n" + dbExplain[leftRank] + "\nRight Ear：\n" + dbExplain[rightRank]
         }
 
         bt_end.setOnClickListener { toMainPager() }

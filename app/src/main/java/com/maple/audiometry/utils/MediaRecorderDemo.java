@@ -72,7 +72,7 @@ public class MediaRecorderDemo {
 			double ratio = (double) mMediaRecorder.getMaxAmplitude() / BASE;
 			double db = 0;
 			if (ratio > 1) {
-				db = 20 * Math.log10(ratio);
+				db = 10 * Math.log10(ratio);
 			}
 
 			if (db > 70) {

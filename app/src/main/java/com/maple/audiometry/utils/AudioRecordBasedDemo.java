@@ -79,7 +79,7 @@ public class AudioRecordBasedDemo {
 
 		// Only compute decibels if mean is greater than 1 to avoid negative or -Infinity dB values
 		if (mean > 1) {
-			volume = 18 * Math.log10(mean);
+			volume = 10 * Math.log10(mean);
 		}
 
 		if (volume > 100) {

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="您的听力损失程度为："
+            android:text="Your hearing impairment result:"
             android:textSize="18sp" />
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="左耳：25.93(中度) \n右耳：34.52(轻度)"
+            android:text="左耳：25.93(Medium) \Right Ear：34.52(轻度)"
             android:textSize="18sp"
             android:textStyle="bold" />
 

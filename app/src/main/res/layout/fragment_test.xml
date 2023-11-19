@@ -29,10 +29,9 @@
             android:id="@+id/tv_play_des"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="当前频率:\n 1000 Hz"
+            android:text="Current Frequency:\n 1000 Hz"
             android:textSize="20sp" />
 
     </RelativeLayout>
@@ -59,7 +58,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="当前分贝:\n 40 dB"
+            android:text="Current dB:\n 40 dB"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -82,7 +81,7 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
             android:background="@drawable/selector_button_color"
-            android:text="听不到"
+            android:text="Cannot hear"
             android:textColor="@color/button_text_color"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -98,7 +97,7 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
             android:background="@drawable/selector_button_color"
-            android:text="播放"
+            android:text="Play"
             android:textColor="@color/button_text_color"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -114,7 +113,7 @@
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
             android:background="@drawable/selector_button_color"
-            android:text="听得到"
+            android:text="Can Hear"
             android:textColor="@color/button_text_color"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -133,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="说明"
+            android:text="Instruction"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
