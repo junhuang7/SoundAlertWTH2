@@ -19,7 +19,7 @@ class MainActivity : BaseFragmentActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         bt_noise.setOnClickListener { toCheckNoise() }
-        bt_voice.setOnClickListener { toCheckEar() }
+        //bt_voice.setOnClickListener { toCheckEar() }
         bt_yamnet.setOnClickListener { launchYamnetApp() }
     }
 

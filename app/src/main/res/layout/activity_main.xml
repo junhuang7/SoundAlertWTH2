@@ -30,19 +30,6 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/bt_voice"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_margin="45dp"
-        android:layout_weight="1"
-        android:background="@drawable/selector_button_color"
-        android:text="Tiny ML"
-        android:textColor="@color/button_text_color"
-        android:textSize="35sp"
-        android:textStyle="bold" />
-
-    <Button
         android:id="@+id/bt_yamnet"
         android:layout_width="match_parent"
         android:layout_height="0dp"
